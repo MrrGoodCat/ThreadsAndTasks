@@ -12,6 +12,8 @@ namespace ThreadsAndTasks
     {
         public static Semaphore Bounser { get; set; }
         public static ManualResetEvent mrs;
+        private static object threadLock = new object();
+
         static void Main(string[] args)
         {
             Bounser = new Semaphore(1, 1);
@@ -71,40 +73,74 @@ namespace ThreadsAndTasks
         }
         static void Talk()
         {
-            Thread thread = new Thread(() => Console.Write("Talk "));
-            thread.Start();
-            //Console.Write("Talk ");
-            mrs.Set();
+            lock (threadLock)
+            {
+                Console.Write("Talk ");
+            }
+            //Thread thread = new Thread(() => Console.Write("Talk "));
+            //thread.Start();
+
+            //mrs.Set();
         }
         static void Iss()
         {
-            Thread thread = new Thread(() => Console.Write("is "));
-            thread.Start();          
+            lock (threadLock)
+            {
+                Console.Write("is ");
+            }
+            //Thread thread = new Thread(() => Console.Write("is "));
+            //thread.Start();
+
         }
         static void Cheap()
         {
-            Thread thread = new Thread(() => Console.Write("cheap. "));
-            thread.Start();           
+            lock (threadLock)
+            {
+                Console.Write("cheap. ");
+            }
+            //Thread thread = new Thread(() => Console.Write("cheap. "));
+            //thread.Start();
+
         }
         static void Show()
         {
-            Thread thread = new Thread(() => Console.Write("Show "));
-            thread.Start();
+            lock (threadLock)
+            {
+                Console.Write("Show ");
+            }
+            //Thread thread = new Thread(() => Console.Write("Show "));
+            //thread.Start();
+
         }
         static void Me()
         {
-            Thread thread = new Thread(() => Console.Write("me "));
-            thread.Start();
+            lock (threadLock)
+            {
+                Console.Write("me ");
+            }
+            //Thread thread = new Thread(() => Console.Write("me "));
+            //thread.Start();
+
         }
         static void The()
         {
-            Thread thread = new Thread(() => Console.Write("the "));
-            thread.Start();
+            lock (threadLock)
+            {
+                Console.Write("the ");
+            }
+            //Thread thread = new Thread(() => Console.Write("the "));
+            //thread.Start();
+
         }
         static void Code()
         {
-            Thread thread = new Thread(() => Console.Write("code.\n"));
-            thread.Start();
+            lock (threadLock)
+            {
+                Console.Write("code.\n");
+            }
+            //Thread thread = new Thread(() => Console.Write("code.\n"));
+            //thread.Start();
+
         }
     }
 }
